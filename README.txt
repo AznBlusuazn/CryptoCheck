@@ -1,7 +1,7 @@
 =============================================
 CryptoCheck by Geoff Clark
 PUBLISHED by CLARKTRIBEGAMES LLC
-VERSION 1.0.000.0001
+VERSION 1.0.000.0002
 =============================================
 
 SUPPORT THE DEVELOPMENT OF THIS APP @ 
@@ -62,7 +62,13 @@ THEM.*
 
 RELEASE NOTES
 
-[CURRENT UPDATES]
+[CURRENT UPDATE]
+
+1.0.000.0002 / 2021.11.10
+
+- Updated Updater Process.
+
+[PREVIOUS UPDATES]
 
 1.0.000.0001 / 2021.09.04
 
