@@ -35,27 +35,31 @@
 
     Public Shared Sub Load()
         If System.IO.File.Exists(Mem.SettingsFile) = True Then
-            Dim Wrapper As New CTGEncoder.Engine(Mem.TheMagic)
+            Dim Wrapper As New ClarkTribeGames.Coder(Mem.TheMagic)
             Dim Data As String = ""
             For Each Line As String In System.IO.File.ReadLines(Mem.SettingsFile)
                 Data = Line
             Next
             Dim Dec As String = Toolbox.CTGExtractor(Data)
             Dim RawData As String = Wrapper.DecryptData(Dec)
-            Main.SpentBox.Text = Toolbox.DoubleUp(RawData.Split(";")(0), 2)
-            Main.FeesBox.Text = Toolbox.DoubleUp(RawData.Split(";")(1), 2)
+            Try
+                Main.SpentBox.Text = Toolbox.DoubleUp(RawData.Split(";")(0), 2)
+                Main.FeesBox.Text = Toolbox.DoubleUp(RawData.Split(";")(1), 2)
+            Catch
+                'This means there is nothing in the settings yet.
+            End Try
             Dim RawList As String = RawData.Split(";")(2)
             If Not RawList = "" Then
-                Dim SplitList() As String = RawList.Split(" ")
-                For Each Item In SplitList
-                    Mem.UserList.Add(Item)
-                    UpdateInventory()
-                    Main.AddQuantityBox.Text = ""
-                    Main.RemoveQuantityBox.Text = ""
-                    Main.CoinDrop.SelectedIndex = -1
-                    Main.CoinDrop.SelectedIndex = 0
-                Next
-            End If
+                    Dim SplitList() As String = RawList.Split(" ")
+                    For Each Item In SplitList
+                        Mem.UserList.Add(Item)
+                        UpdateInventory()
+                        Main.AddQuantityBox.Text = ""
+                        Main.RemoveQuantityBox.Text = ""
+                        Main.CoinDrop.SelectedIndex = -1
+                        Main.CoinDrop.SelectedIndex = 0
+                    Next
+                End If
         End If
     End Sub
     Public Shared Sub ProcessValue(textbox As TextBox)
@@ -214,7 +218,7 @@
         Next
         If Not UserInfo = "" Then UserInfo = UserInfo.Substring(1)
         Dim WriteText As String = Spent & Fees & UserInfo
-        Dim Wrapper As New CTGEncoder.Engine(Mem.TheMagic), WrappedUp As String, FinalText As String
+        Dim Wrapper As New ClarkTribeGames.Coder(Mem.TheMagic), WrappedUp As String, FinalText As String
         WrappedUp = Wrapper.EncryptData(WriteText)
         FinalText = Toolbox.CTGRBuilder(WrappedUp).ToString
         System.IO.File.WriteAllText(Mem.SettingsFile, "")

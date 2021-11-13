@@ -10,7 +10,8 @@
             .FileName = ".\" & Mem.Updater,
             .Arguments = "-Path " & Application.ProductName & " -Dir " &
             (System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
-            GetExecutingAssembly().CodeBase)).Substring(6),
+            GetExecutingAssembly().CodeBase)).Substring(6) & " -URL " &
+            Mem.UpdateU,
             .UseShellExecute = True,
             .WindowStyle = ProcessWindowStyle.Normal
         }
