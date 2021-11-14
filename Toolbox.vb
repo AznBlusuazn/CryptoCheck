@@ -1,30 +1,8 @@
 ﻿Public Class Toolbox
-    Public Shared Function VersionConverter(versionpart As String, digits As Integer) As String
-        Dim PartLength As Integer = Len(versionpart)
-        Select Case PartLength
-            Case digits - 1
-                VersionConverter = "0" + versionpart
-            Case digits - 2
-                VersionConverter = "00" + versionpart
-            Case digits - 3
-                VersionConverter = "000" + versionpart
-            Case digits - 4
-                VersionConverter = "0000" + versionpart
-            Case Else
-                VersionConverter = versionpart
-        End Select
-    End Function
+
     Public Shared Sub AddToRich(rich As RichTextBox, text As String, color As Color)
         rich.SelectionColor = color
         rich.SelectedText = text
-    End Sub
-    Public Shared Sub GoToWeb(url As String)
-        Try
-            Process.Start(url)
-        Catch ex As Exception
-            'Logger.Logger.WriteToLog(1, "GoToWeb", "Something went wrong with launching system your browser." &
-            '    vbCrLf & vbCrLf & "Please try going to " & url & " manually.", ex)
-        End Try
     End Sub
     Public Shared Function TestKeyPress(key As String, type As String) As Boolean
         Dim ReturnValue As Boolean = False

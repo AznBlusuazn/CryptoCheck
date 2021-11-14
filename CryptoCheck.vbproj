@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Toolbox.vb" />
-    <Compile Include="Updater.vb" />
     <Compile Include="Init.vb" />
     <Compile Include="Mem.vb" />
     <Compile Include="Engine.vb" />

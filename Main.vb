@@ -61,7 +61,11 @@
         Environment.Exit(1)
     End Sub
     Private Sub ProductLabel_Click(sender As Object, e As EventArgs) Handles ProductLabel.Click
-        Toolbox.GoToWeb("https://www.clarktribegames.com")
+        Try
+            ClarkTribeGames.Web.CTG()
+        Catch ex As Exception
+            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+        End Try
     End Sub
     Private Sub ProductLabel_Hover(sender As Object, e As EventArgs) Handles ProductLabel.MouseHover
         sender.ForeColor = Color.Green
@@ -73,15 +77,23 @@
         Engine.About()
     End Sub
     Private Sub DonateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DonateToolStripMenuItem.Click
-        Toolbox.GoToWeb("https://www.paypal.me/AznBlusuazn")
+        Try
+            ClarkTribeGames.Web.PP()
+        Catch ex As Exception
+            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+        End Try
     End Sub
     Private Sub PatreonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatreonToolStripMenuItem.Click
-        Toolbox.GoToWeb("https://www.patreon.com/ClarkTribeGames")
+        Try
+            ClarkTribeGames.Web.PT()
+        Catch ex As Exception
+            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+        End Try
     End Sub
     Private Sub CheckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesToolStripMenuItem.Click
-        If Updater.Checker(Mem.Version, Mem.Available) = True Then
+        If ClarkTribeGames.Updater.Checker(Mem.Version, Mem.Available) = True Then
             Dim Answer As Integer = MsgBox("Update " & Mem.Available & " Available!" & vbCrLf & vbCrLf & "Would you like to update now?", vbYesNo + vbExclamation)
-            If Answer = vbYes Then Updater.InstallUpdate() Else MsgBox("Please update as soon as possible!")
+            If Answer = vbYes Then ClarkTribeGames.Updater.InstallUpdate(Application.ProductName, Mem.UpdateU) Else MsgBox("Please update as soon as possible!")
         Else
             MsgBox("No Update Available!")
         End If
