@@ -15,8 +15,7 @@
         ClarkTribeGames.Updater.Checker(Mem.Version, Mem.Available)
         If Not System.IO.File.Exists(Mem.CoinFile) Then Engine.BuildCoinFile()
         Engine.BuildDrop(Main.CoinDrop)
-        Main.ProductLabel.Text = Mem.AppName & " v" & Mem.Version & " by " & (FileVersionInfo.GetVersionInfo(System.
-            Reflection.Assembly.GetEntryAssembly().Location)).CompanyName
+        Main.ProductLabel.Text = $"{Mem.AppName} v{Mem.Version} by {Application.CompanyName}"
         Engine.Load()
     End Sub
 

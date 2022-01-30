@@ -6,10 +6,10 @@
                 Case "all"
                     Response = GetValue("coins")
                 Case "coin"
-                    Response = GetValue("coins/" & coinid & "/ohlcv/today/")
+                    Response = GetValue($"coins/{coinid}/ohlcv/today/")
             End Select
         Catch ex As Exception
-            MsgBox("Gateway Timeout:  You might be trying to do queries too fast!" & vbCrLf & vbCrLf & "Please restart the application and try again.")
+            MsgBox($"Gateway Timeout:  You might be trying to do queries too fast!{vbCrLf}{vbCrLf}Please restart the application and try again.")
             Environment.Exit(1)
         End Try
         Return Response
@@ -20,7 +20,6 @@
         request.Credentials = System.Net.CredentialCache.DefaultCredentials
         Dim response As System.Net.WebResponse = request.GetResponse()
         'This string is check if OK
-        '(CType(response, System.Net.HttpWebResponse).StatusDescription)
         Dim dataStream As System.IO.Stream = response.GetResponseStream()
         Dim reader As New System.IO.StreamReader(dataStream)
         Dim responseFromServer As String = reader.ReadToEnd()

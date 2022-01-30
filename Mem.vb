@@ -6,13 +6,10 @@
     Public Shared UpdaterD As String
     Public Shared UpdateU As String
     Public Shared AppName As String = Application.ProductName
-    Public Shared TheMagic As String = ((FileVersionInfo.
-        GetVersionInfo(System.Reflection.Assembly.GetEntryAssembly().Location)).
-        CompanyName).Substring(0, ((FileVersionInfo.GetVersionInfo(System.
-        Reflection.Assembly.GetEntryAssembly().Location)).CompanyName).Length - 4)
+    Public Shared TheMagic As String = Application.CompanyName.Substring(0, Application.CompanyName.Length - 4)
     Public Shared CoinInfo As String
-    Public Shared SettingsFile As String = AppName & ".settings"
-    Public Shared CoinFile As String = AppName & ".coins"
+    Public Shared SettingsFile As String = $"{AppName}.settings"
+    Public Shared CoinFile As String = $"{AppName}.coins"
     Public Shared CoinList As New List(Of String)
     Public Shared UserList As New List(Of String)
 End Class

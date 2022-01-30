@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("ClarkTribeGames LLC")>
 <Assembly: AssemblyProduct("CryptoCheck")>
-<Assembly: AssemblyCopyright("Copyright © ClarkTribeGames, LLC 2021")>
+<Assembly: AssemblyCopyright("Copyright © ClarkTribeGames, LLC 2022")>
 <Assembly: AssemblyTrademark("ClarkTribeGames, LLC")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.000.0003")>
-<Assembly: AssemblyFileVersion("1.0.000.0003")>
+<Assembly: AssemblyVersion("1.0.000.0004")>
+<Assembly: AssemblyFileVersion("1.0.000.0004")>

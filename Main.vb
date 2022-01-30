@@ -64,7 +64,7 @@
         Try
             ClarkTribeGames.Web.CTG()
         Catch ex As Exception
-            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+            MsgBox($"Problem opening the web... {vbCrLf}{ex}")
         End Try
     End Sub
     Private Sub ProductLabel_Hover(sender As Object, e As EventArgs) Handles ProductLabel.MouseHover
@@ -80,19 +80,19 @@
         Try
             ClarkTribeGames.Web.PP()
         Catch ex As Exception
-            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+            MsgBox($"Problem opening the web... {vbCrLf}{ex}")
         End Try
     End Sub
     Private Sub PatreonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatreonToolStripMenuItem.Click
         Try
             ClarkTribeGames.Web.PT()
         Catch ex As Exception
-            MsgBox("Problem opening the web... " & vbCrLf & ex.ToString)
+            MsgBox($"Problem opening the web... {vbCrLf}{ex}")
         End Try
     End Sub
     Private Sub CheckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesToolStripMenuItem.Click
         If ClarkTribeGames.Updater.Checker(Mem.Version, Mem.Available) = True Then
-            Dim Answer As Integer = MsgBox("Update " & Mem.Available & " Available!" & vbCrLf & vbCrLf & "Would you like to update now?", vbYesNo + vbExclamation)
+            Dim Answer As Integer = MsgBox($"Update {Mem.Available} Available!{vbCrLf}{vbCrLf}Would you like to update now?", vbYesNo + vbExclamation)
             If Answer = vbYes Then ClarkTribeGames.Updater.InstallUpdate(Application.ProductName, Mem.UpdateU) Else MsgBox("Please update as soon as possible!")
         Else
             MsgBox("No Update Available!")

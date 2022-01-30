@@ -13,7 +13,7 @@
             Dim IsNew As String = Breakdown(4).Replace("is_new:", "")
             Dim IsOn As String = Breakdown(5).Replace("is_active:", "")
             Dim Type As String = Breakdown(6).Replace("type:", "")
-            file.WriteLine(ID & "," & Name & "," & Symbol & "," & Rank & "," & IsNew & "," & IsOn & "," & Type)
+            file.WriteLine($"{ID},{Name},{Symbol},{Rank},{IsNew},{IsOn},{Type}")
         Next
         file.Close()
     End Sub
@@ -22,13 +22,13 @@
             For Each Line As String In System.IO.File.ReadLines(Mem.CoinFile)
                 Dim Breakdown() As String = Line.Split(",")
                 If LCase(Breakdown(5)) = "true" Then
-                    drop.Items.Add(Breakdown(2) & " " & Breakdown(1) & " #" & Breakdown(3))
+                    drop.Items.Add($"{Breakdown(2)} {Breakdown(1)} #{Breakdown(3)}")
                     Mem.CoinList.Add(Breakdown(0))
                 End If
             Next
             drop.SelectedIndex = 0
         Else
-            MsgBox("Something is wrong with your " & Mem.CoinFile & " file.  Restart the application.")
+            MsgBox($"Something is wrong with your {Mem.CoinFile} file.  Restart the application.")
             Environment.Exit(1)
         End If
     End Sub
@@ -87,7 +87,7 @@
             Main.RemoveCoinBox.Text = ""
             Main.AddQuantityBox.Enabled = True
             Main.AddQuantityBox.BackColor = Color.FromArgb(0, 5, 0)
-            Dim CoinInfo As String = Main.CoinDrop.SelectedIndex & "," & Main.CoinDrop.Text.Split(" ")(0) & ","
+            Dim CoinInfo As String = $"{($"{Main.CoinDrop.SelectedIndex},{Main.CoinDrop.Text}").Split(" ")(0)},"
             Dim Skip As Boolean = False
             For x As Integer = 0 To Mem.UserList.Count - 1
                 If Skip = False Then
@@ -123,14 +123,14 @@
             Dim StartText As String = textbox.Text, EndText As String
             If StartText.Length > 0 And InStr(StartText, ".") > 0 Then
                 Dim FirstDot As Integer = StartText.IndexOf(".")
-                EndText = StartText.Substring(0, FirstDot) & "." & Replace(StartText.Substring(FirstDot + 1), ".", "")
+                EndText = $"{StartText.Substring(0, FirstDot)}.{Replace(StartText.Substring(FirstDot + 1), ".", "")}"
                 textbox.Text = EndText
             End If
         End If
     End Sub
     Public Shared Sub UpdateCoin(type As String)
         Dim CoinNumber As Integer = Main.CoinDrop.SelectedIndex
-        Dim Coin As String = CoinNumber & "," & Main.CoinDrop.Text.Split(" ")(0) & ","
+        Dim Coin As String = $"{CoinNumber},{Main.CoinDrop.Text.Split(" ")(0)},"
         Dim Quantity As String
         If type = "+" Then Quantity = Main.AddQuantityBox.Text Else Quantity = Main.RemoveQuantityBox.Text
         Dim CoinInfo As String = Coin & Quantity
@@ -176,7 +176,7 @@
     End Sub
     Public Shared Sub AddAllLink()
         Dim CoinNumber As Integer = Main.CoinDrop.SelectedIndex
-        Dim Coin As String = CoinNumber & "," & Main.CoinDrop.Text.Split(" ")(0) & ","
+        Dim Coin As String = $"{CoinNumber},{Main.CoinDrop.Text.Split(" ")(0)},"
         Dim Quantity As String = 0
         Dim CoinInfo As String = Coin & Quantity
         For x As Integer = 0 To Mem.UserList.Count - 1
@@ -197,8 +197,8 @@
         Main.NetBox.Text = Toolbox.DoubleUp(Net, 2)
     End Sub
     Public Shared Sub Reset()
-        Dim Answer As Integer = MsgBox("This will reset all fields and your saved settings." & vbCrLf &
-            vbCrLf & "Are you sure you want to do this?", vbYesNo + vbExclamation)
+        Dim Answer As Integer = MsgBox($"This will reset all fields and your saved settings.{vbCrLf}" &
+            $"{vbCrLf}Are you sure you want to do this?", vbYesNo + vbExclamation)
         If Not Answer = vbYes Then Exit Sub
         Mem.UserList.Clear()
         Main.SpentBox.Text = ""
@@ -210,14 +210,14 @@
         Main.CoinDrop.SelectedIndex = 0
     End Sub
     Public Shared Sub Save()
-        Dim Spent As String = Main.SpentBox.Text & ";"
-        Dim Fees As String = Main.FeesBox.Text & ";"
+        Dim Spent As String = $"{Main.SpentBox.Text};"
+        Dim Fees As String = $"{Main.FeesBox.Text};"
         Dim UserInfo As String = ""
         For Each Item In Mem.UserList
-            UserInfo &= " " & Item
+            UserInfo &= $" {Item}"
         Next
         If Not UserInfo = "" Then UserInfo = UserInfo.Substring(1)
-        Dim WriteText As String = Spent & Fees & UserInfo
+        Dim WriteText As String = $"{Spent}{Fees}{UserInfo}"
         Dim Wrapper As New ClarkTribeGames.Coder(Mem.TheMagic), WrappedUp As String, FinalText As String
         WrappedUp = Wrapper.EncryptData(WriteText)
         FinalText = Toolbox.CTGRBuilder(WrappedUp).ToString
@@ -229,10 +229,10 @@
     End Sub
     Public Shared Sub About()
         MsgBox("This application was designed as a way to keep track of one's Crypto balance from one location." &
-            vbCrLf & vbCrLf & "This application relies on the Coinaprika API provided by api.coinaprika.com" & vbCrLf &
-            vbCrLf & "This application was licensed under the GNU General Public License 3.0." & vbCrLf & vbCrLf &
-            "Written by ClarkTribeGames LLC." & vbCrLf & vbCrLf &
-            "If you found this application useful, please consider a Donation or Patreon membership." & vbCrLf & vbCrLf &
+            $"{vbCrLf}{vbCrLf}This application relies on the Coinaprika API provided by api.coinaprika.com{vbCrLf}" &
+            $"{vbCrLf}This application was licensed under the GNU General Public License 3.0.{vbCrLf}{vbCrLf}" &
+            $"Written by ClarkTribeGames LLC.{vbCrLf}{vbCrLf}" &
+            $"If you found this application useful, please consider a Donation or Patreon membership.{vbCrLf}{vbCrLf}" &
             "Thank you! ~ Geoff", vbInformation + vbOKOnly)
     End Sub
 End Class
